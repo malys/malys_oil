@@ -70,9 +70,9 @@ public class PredictionCronServlet extends HttpServlet {
 		calend.add(Calendar.HOUR, -1 * 24 * 5);
 		Date date = calend.getTime();
 		query.declareImports("import java.util.Date");
-		
-		_logger.info("Requete du " + date.toString() + " à aujourd'hui" );
- 
+
+		_logger.info("Requete du " + date.toString() + " à aujourd'hui");
+
 		List<StockDataDb> results = (List<StockDataDb>) query.execute(date);
 		Iterator<StockDataDb> iter = results.iterator();
 		while (iter.hasNext()) {
@@ -96,14 +96,13 @@ public class PredictionCronServlet extends HttpServlet {
 		}
 
 		if (oldStock.getClose() == min) {
-			sendEmail(oldStock, max,true);
+			sendEmail(oldStock, max, true);
 		}
-		
+
 		if (oldStock.getClose() == max) {
-			sendEmail(oldStock, max,false);
+			sendEmail(oldStock, max, false);
 		}
-		
-		
+
 	}
 
 	@Override
@@ -112,7 +111,7 @@ public class PredictionCronServlet extends HttpServlet {
 		doGet(req, resp);
 	}
 
-	private void sendEmail(StockDataDb stockData, Double max,Boolean buy) {
+	private void sendEmail(StockDataDb stockData, Double max, Boolean buy) {
 
 		if (stockData.getClose() != 0) {
 			Properties props = new Properties();
@@ -123,28 +122,27 @@ public class PredictionCronServlet extends HttpServlet {
 					+ dateFormatProgress.format(Calendar.getInstance()
 							.getTime());
 			String msgBody = "";
-			if (buy){
+			if (buy) {
 				msgBody = "C'est le moment de faire le plein. \n Il y a 5 jours le cours était à "
-					+ stockData.getClose()
-					+ "$ et il atteint après "
-					+ max
-					+ "$";
-			}else{
+						+ stockData.getClose()
+						+ "$ et il atteint après "
+						+ max
+						+ "$";
+			} else {
 				msgBody = "IL FAUT SURTOUT PAS FAIRE LE PLEIN. \n Il y a 5 jours le cours était à "
-					+ stockData.getClose()
-					+ "$ et il atteint après "
-					+ max
-					+ "$";
+						+ stockData.getClose()
+						+ "$ et il atteint après "
+						+ max
+						+ "$";
 			}
-			
 
 			try {
 				Message msg = new MimeMessage(session);
 
-				msg.setFrom(new InternetAddress("malysus@gmail.com"));
+				msg.setFrom(new InternetAddress("XXXXXXXX"));
 
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-						"malysus@gmail.com", "Mr. Developer"));
+						"XXXXXXXX", "Mr. Developer"));
 				msg.setSubject(title);
 				msg.setText(msgBody);
 				Transport.send(msg);
