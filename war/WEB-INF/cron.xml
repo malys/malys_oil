@@ -12,8 +12,8 @@
 	</cron>
 	<cron>
 		<url>/stockprediction/PredictionCleanCron</url>
-		<description>Warning for saling oil</description>
-		<schedule>every day 11:00</schedule>
+		<description>Purge saling oil</description>
+		<schedule>every month</schedule>
 	</cron>
 
 </cronentries>
