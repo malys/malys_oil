@@ -54,17 +54,25 @@ public class GetStockHistory {
 			// The first line is the header, ignoring
 			String inputLine = null;
 			;
-			int index = 0;
+			int index = -1;
+			int index2 = -1;
 
 			String price = "";
-			String tag = "Le Cours du baril de pétrole en euros";
+			String tag = "Le Cours du baril de p";
+			String tag2 = "en euros";
 
 			while ((inputLine = in.readLine()) != null) {
-				index = inputLine.indexOf(tag);
+				index = inputLine.toUpperCase().indexOf(tag.toUpperCase());
 
 				if (index > -1) {
+					index2 = inputLine.toUpperCase().indexOf(
+							tag2.toUpperCase(), index + 1);
 
-					price = extractValue(inputLine, index);
+				}
+
+				if (index > -1 && index2 > -1) {
+
+					price = extractValue(inputLine, index2);
 					if (!price.equals("")) {
 
 						result = Double.valueOf(price);
@@ -72,7 +80,7 @@ public class GetStockHistory {
 					}
 
 				} else {
-					System.out.println(inputLine);
+					// System.out.println(inputLine);
 				}
 			}
 			in.close();
@@ -81,6 +89,8 @@ public class GetStockHistory {
 			System.out.println(e.getMessage());
 
 		}
+
+		System.out.println("Price detected " + result);
 		return result;
 
 	}
