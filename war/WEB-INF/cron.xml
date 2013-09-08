@@ -10,9 +10,10 @@
 		<description>Warning for saling oil</description>
 		<schedule>every day 12:00</schedule>
 	</cron>
-		<cron>
-		<url>/stockprediction/PingCron</url>
+	<cron>
+		<url>/stockprediction/PredictionCleanCron</url>
 		<description>Warning for saling oil</description>
-		<schedule>every 1 hours</schedule>
+		<schedule>every day 11:00</schedule>
 	</cron>
+
 </cronentries>

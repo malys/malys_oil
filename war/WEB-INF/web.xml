@@ -47,7 +47,7 @@
 
 	<servlet-mapping>
 		<servlet-name>PredictionCleanServlet</servlet-name>
-		<url-pattern>/stockprediction/PredictionClean</url-pattern>
+		<url-pattern>/stockprediction/PredictionCleanCron</url-pattern>
 	</servlet-mapping>
 
 
