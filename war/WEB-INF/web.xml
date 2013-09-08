@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>stockServlet</servlet-name>
+		<servlet-class>fr.free.chiquichi.server.StockServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>stockServlet</servlet-name>
+		<url-pattern>/stockprediction/stock</url-pattern>
+	</servlet-mapping>
+
+	<!-- Cron -->
+	<servlet>
+		<servlet-name>YahooCronServlet</servlet-name>
+		<servlet-class>fr.free.chiquichi.server.cron.YahooCronServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>YahooCronServlet</servlet-name>
+		<url-pattern>/stockprediction/YahooCron</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>PredictionServlet</servlet-name>
+		<servlet-class>fr.free.chiquichi.server.cron.PredictionCronServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PredictionServlet</servlet-name>
+		<url-pattern>/stockprediction/PredictionCron</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>PredictionCleanServlet</servlet-name>
+		<servlet-class>fr.free.chiquichi.server.cron.PredictionCleanCronServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PredictionCleanServlet</servlet-name>
+		<url-pattern>/stockprediction/PredictionClean</url-pattern>
+	</servlet-mapping>
+
+
+
+
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>StockPrediction.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

@@ -33,10 +33,15 @@ public class GetStockHistory {
 		return instance;
 	}
 
-	public ArrayList<StockDataDb> updateHistory(String company) {
+	/***
+	 * Extract Oil Price from Web Page
+	 * 
+	 * @return
+	 */
+	public Double getPrice() {
+		Double result = 0.0;
 
 		try {
-
 			String url = "http://prixdubaril.com/";
 
 			URLConnection urlConnection = new URL(url.toString())
@@ -52,25 +57,17 @@ public class GetStockHistory {
 			int index = 0;
 
 			String price = "";
+			String tag = "Le Cours du baril de pÃ©trole en euros";
 
 			while ((inputLine = in.readLine()) != null) {
-
-				index = inputLine
-						.indexOf(">Le Cours du baril de pétrole en euros :");
+				index = inputLine.indexOf(tag);
 
 				if (index > -1) {
 
 					price = extractValue(inputLine, index);
 					if (!price.equals("")) {
 
-						Calendar day = Calendar.getInstance();
-
-						StockDataDb data = new StockDataDb();
-
-						data.setClose(Double.valueOf(price));
-
-						data.setDate(day.getTime());
-						history.add(data);
+						result = Double.valueOf(price);
 						break;
 					}
 
@@ -79,6 +76,28 @@ public class GetStockHistory {
 				}
 			}
 			in.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+
+	}
+
+	public ArrayList<StockDataDb> updateHistory() {
+
+		try {
+
+			Calendar day = Calendar.getInstance();
+
+			StockDataDb data = new StockDataDb();
+
+			data.setClose(getPrice());
+
+			data.setDate(day.getTime());
+			history.add(data);
+
 			return history.m_stockHistory;
 
 		} catch (Exception e) {

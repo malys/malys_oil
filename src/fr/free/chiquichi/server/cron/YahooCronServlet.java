@@ -25,6 +25,7 @@ public class YahooCronServlet extends HttpServlet {
 	private static final Logger _logger = Logger
 			.getLogger(YahooCronServlet.class.getName());
 
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
@@ -35,17 +36,17 @@ public class YahooCronServlet extends HttpServlet {
 			// BEGIN
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			List<StockDataDb> list = GetStockHistory.getInstance()
-					.updateHistory("CLJ10.NYM");
+					.updateHistory();
 			Iterator<StockDataDb> iter = list.iterator();
 			while (iter.hasNext()) {
-				stockData = (StockDataDb) iter.next();
+				stockData = iter.next();
 
 				pm.makePersistent(stockData);
 
 				_logger.info(YahooCronServlet.class.getName() + ": Ajout de "
 						+ stockData.getDate().toString() + " "
 						+ stockData.getClose());
-				
+
 				stockData = null;
 
 			}

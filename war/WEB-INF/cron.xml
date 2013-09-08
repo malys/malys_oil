@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/stockprediction/YahooCron</url>
+		<description>download Yahoo</description>
+		<schedule>every day 21:00</schedule>
+	</cron>
+	<cron>
+		<url>/stockprediction/PredictionCron</url>
+		<description>Warning for saling oil</description>
+		<schedule>every day 12:00</schedule>
+	</cron>
+		<cron>
+		<url>/stockprediction/PingCron</url>
+		<description>Warning for saling oil</description>
+		<schedule>every 1 hours</schedule>
+	</cron>
+</cronentries>
