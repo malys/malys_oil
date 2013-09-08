@@ -1,23 +1,11 @@
 package fr.free.chiquichi.server.cron;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +27,7 @@ public class YahooCronServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		String value = "echec";
+
 		StockDataDb stockData = null;
 
 		try {
@@ -57,7 +45,7 @@ public class YahooCronServlet extends HttpServlet {
 				_logger.info(YahooCronServlet.class.getName() + ": Ajout de "
 						+ stockData.getDate().toString() + " "
 						+ stockData.getClose());
-				value = String.valueOf(stockData.getClose());
+				
 				stockData = null;
 
 			}

@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import fr.free.chiquichi.server.datastore.model.StockDataDb;
 
-
 public class StockHistory {
 	ArrayList<StockDataDb> m_stockHistory;
-	
+
 	public StockHistory() {
 		m_stockHistory = new ArrayList<StockDataDb>();
 	}

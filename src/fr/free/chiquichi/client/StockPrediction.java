@@ -54,7 +54,7 @@ public class StockPrediction implements EntryPoint {
 	private void processList(ArrayList<StockData> list) {
 
 		Integer i = 0;
-		
+
 		GChart chart = new GChart();
 
 		chart.setChartTitle("<b>Oil Price Chart</b>");
@@ -85,10 +85,10 @@ public class StockPrediction implements EntryPoint {
 			}
 
 		}
-		
-		   RootPanel.get().add(chart);
-		   chart.update();
-		   
+
+		RootPanel.get().add(chart);
+		chart.update();
+
 	}
 
 	/**

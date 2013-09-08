@@ -11,9 +11,8 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class StockDataDb{
+public class StockDataDb {
 
 	// Cle unique pour le datastore
 	@PrimaryKey
@@ -54,8 +53,8 @@ public class StockDataDb{
 		this.date = date;
 
 		// On date la clé sur la date
-		key = KeyFactory.createKey(StockDataDb.class.getSimpleName(), date
-				.getTime());
+		key = KeyFactory.createKey(StockDataDb.class.getSimpleName(),
+				date.getTime());
 	}
 
 	public Key getKey() {

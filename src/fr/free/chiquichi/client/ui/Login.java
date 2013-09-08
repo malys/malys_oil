@@ -1,7 +1,6 @@
 package fr.free.chiquichi.client.ui;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -20,33 +19,29 @@ import fr.free.chiquichi.client.StockServiceAsync;
 
 public class Login extends Composite {
 
-
 	@UiTemplate("Login.ui.xml")
 	interface LoginUiBinder extends UiBinder<Panel, Login> {
 	}
-	
-	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
+	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
 	private final StockServiceAsync loginService = GWT
 			.create(StockService.class);
-	
-	
 
-	//@UiField(provided = true)
-	//final LoginRessource res;
+	// @UiField(provided = true)
+	// final LoginRessource res;
 
-	//private static boolean stylesInjected = false;
+	// private static boolean stylesInjected = false;
 
 	public Login() {
 
-	/*	this.res = GWT.create(LoginRessource.class);
-
-		// Inject only once.
-		if (!stylesInjected) {
-			StyleInjector.injectStylesheet(res.style().getText());
-			stylesInjected = true;
-		}*/
+		/*
+		 * this.res = GWT.create(LoginRessource.class);
+		 * 
+		 * // Inject only once. if (!stylesInjected) {
+		 * StyleInjector.injectStylesheet(res.style().getText()); stylesInjected
+		 * = true; }
+		 */
 
 		initWidget(uiBinder.createAndBindUi(this));
 	}

@@ -9,15 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 import fr.free.chiquichi.server.datastore.model.StockDataDb;
 
 public class GetStockHistory {
 
 	private static GetStockHistory instance;
-	private static final Logger logger = Logger
-			.getLogger(YahooCronServlet.class.getName());
 
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -37,9 +34,9 @@ public class GetStockHistory {
 	}
 
 	public ArrayList<StockDataDb> updateHistory(String company) {
-		
+
 		try {
-		
+
 			String url = "http://prixdubaril.com/";
 
 			URLConnection urlConnection = new URL(url.toString())
@@ -53,16 +50,15 @@ public class GetStockHistory {
 			String inputLine = null;
 			;
 			int index = 0;
-			
+
 			String price = "";
 
 			while ((inputLine = in.readLine()) != null) {
-				
-			
-				index = inputLine.indexOf(">Le Cours du baril de pétrole en euros :");
-				
 
-				if (index > -1  ) {
+				index = inputLine
+						.indexOf(">Le Cours du baril de pétrole en euros :");
+
+				if (index > -1) {
 
 					price = extractValue(inputLine, index);
 					if (!price.equals("")) {
@@ -78,8 +74,7 @@ public class GetStockHistory {
 						break;
 					}
 
-				}
-				else{
+				} else {
 					System.out.println(inputLine);
 				}
 			}
@@ -108,7 +103,7 @@ public class GetStockHistory {
 			int deb = line.indexOf("<span>", initIndex);
 			int end = line.indexOf("</span>", deb);
 
-			return line.substring(deb+6, end).trim();
+			return line.substring(deb + 6, end).trim();
 		} catch (Exception e) {
 			return "";
 		}
