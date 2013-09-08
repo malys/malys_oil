@@ -13,7 +13,7 @@
 	<cron>
 		<url>/stockprediction/PredictionCleanCron</url>
 		<description>Purge saling oil</description>
-		<schedule>every month</schedule>
+		<schedule>1 of month 00:00</schedule>
 	</cron>
 
 </cronentries>
