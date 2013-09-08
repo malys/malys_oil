@@ -37,42 +37,9 @@ public class GetStockHistory {
 	}
 
 	public ArrayList<StockDataDb> updateHistory(String company) {
-		/*
-		 * http://ichart.finance.yahoo.com/table.csv?s=$symbol&d=($monthEnd-1)&e=
-		 * $dayEnd
-		 * &f=$yearEnd&g=d&a=($monthStart-1)&b=$dayStart&c=$yearStart&ignore
-		 * =.csv
-		 */
-
-		/*
-		 * http://download.finance.yahoo.com/d/quotes.csv?s=CLJ10.NYM&f=sl1d1t1c1ohgv
-		 * &e=.csv
-		 */
-		/*
-		 * StringBuffer url = new StringBuffer(
-		 * "http://download.finance.yahoo.com/d/quotes.csv" + "?s=");
-		 * url.append(company); //url.append("&f=sl1d1t1c1ohgv&e=.csv");
-		 * 
-		 * url.append("&a=" + (Calendar.getInstance().get(Calendar.MONTH) ));
-		 * url.append("&b=" + (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-		 * -10)); url.append("&c=" + Calendar.getInstance().get(Calendar.YEAR));
-		 * url.append("&d=" + (Calendar.getInstance().get(Calendar.MONTH)));
-		 * url.append("&e=" +
-		 * (Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
-		 * url.append("&f=" + Calendar.getInstance().get(Calendar.YEAR));
-		 */
-
+		
 		try {
-			/*
-			 * HttpClient client = new HttpClient();
-			 * client.getHostConfiguration().setProxy("proxy", 8080); // Delete
-			 * // this Line // if you // don't use // a proxy
-			 * client.getHttpConnectionManager
-			 * ().getParams().setConnectionTimeout( 5000);
-			 * System.out.println(url.toString()); HttpMethod method = new
-			 * GetMethod(url.toString()); method.setFollowRedirects(true);
-			 * client.executeMethod(method);
-			 */
+		
 			String url = "http://prixdubaril.com/";
 
 			URLConnection urlConnection = new URL(url.toString())
@@ -86,22 +53,16 @@ public class GetStockHistory {
 			String inputLine = null;
 			;
 			int index = 0;
-			int index2 = 0;
+			
 			String price = "";
 
 			while ((inputLine = in.readLine()) != null) {
-				/*
-				 * "CLJ10.NYM",79.69,"3/15/2010","2:19pm",-1.55,81.13,83.16,80.57
-				 * ,0
-				 */
-				/*
-				 * if (inputLine.startsWith("<")) continue; String[] item =
-				 * inputLine.split(","); if (item.length < 6) continue;
-				 */
-				index = inputLine.indexOf(">Le Cours du baril de");
-				index2 = inputLine.indexOf("euro");
+				
+			
+				index = inputLine.indexOf(">Le Cours du baril de pétrole en euros :");
+				
 
-				if (index > -1 && index2 > -1 ) {
+				if (index > -1  ) {
 
 					price = extractValue(inputLine, index);
 					if (!price.equals("")) {
@@ -117,6 +78,9 @@ public class GetStockHistory {
 						break;
 					}
 
+				}
+				else{
+					System.out.println(inputLine);
 				}
 			}
 			in.close();
