@@ -39,6 +39,7 @@ public class PredictionCronServlet extends HttpServlet {
 	private static final Logger _logger = Logger
 			.getLogger(PredictionCronServlet.class.getName());
 
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
@@ -73,10 +74,11 @@ public class PredictionCronServlet extends HttpServlet {
 
 		_logger.info("Requete du " + date.toString() + " à aujourd'hui");
 
+		@SuppressWarnings("unchecked")
 		List<StockDataDb> results = (List<StockDataDb>) query.execute(date);
 		Iterator<StockDataDb> iter = results.iterator();
 		while (iter.hasNext()) {
-			StockDataDb stockData = (StockDataDb) iter.next();
+			StockDataDb stockData = iter.next();
 			if (stockData.getDate().getTime() > lastStock.getDate().getTime()) {
 				lastStock = stockData;
 			}
@@ -113,6 +115,7 @@ public class PredictionCronServlet extends HttpServlet {
 
 	private void sendEmail(StockDataDb stockData, Double max, Boolean buy) {
 
+		String emailAdd = "xxxxxx";
 		if (stockData.getClose() != 0) {
 			Properties props = new Properties();
 			Session session = Session.getDefaultInstance(props, null);
@@ -139,10 +142,10 @@ public class PredictionCronServlet extends HttpServlet {
 			try {
 				Message msg = new MimeMessage(session);
 
-				msg.setFrom(new InternetAddress("XXXXXXXX"));
+				msg.setFrom(new InternetAddress(emailAdd));
 
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-						"XXXXXXXX", "Mr. Developer"));
+						emailAdd, "Mr. Developer"));
 				msg.setSubject(title);
 				msg.setText(msgBody);
 				Transport.send(msg);
