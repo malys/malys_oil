@@ -99,14 +99,18 @@ public class GetStockHistory {
 
 		try {
 
-			Calendar day = Calendar.getInstance();
+			double tmp = getPrice();
 
-			StockDataDb data = new StockDataDb();
+			if (tmp > 0.0) {
 
-			data.setClose(getPrice());
+				Calendar day = Calendar.getInstance();
 
-			data.setDate(day.getTime());
-			history.add(data);
+				StockDataDb data = new StockDataDb();
+				data.setClose(tmp);
+
+				data.setDate(day.getTime());
+				history.add(data);
+			}
 
 			return history.m_stockHistory;
 
