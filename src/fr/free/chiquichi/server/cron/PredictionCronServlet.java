@@ -72,7 +72,7 @@ public class PredictionCronServlet extends HttpServlet {
 		Date date = calend.getTime();
 		query.declareImports("import java.util.Date");
 
-		_logger.info("Requete du " + date.toString() + " à aujourd'hui");
+		_logger.info("Requete du " + date.toString() + " a aujourd'hui");
 
 		@SuppressWarnings("unchecked")
 		List<StockDataDb> results = (List<StockDataDb>) query.execute(date);
@@ -115,7 +115,9 @@ public class PredictionCronServlet extends HttpServlet {
 
 	private void sendEmail(StockDataDb stockData, Double max, Boolean buy) {
 
-		String emailAdd = "xxxxxx";
+		String emailFrom = "xxxxx@gmail.com";
+		String emailAdd = "yyyyyyyyy@gmail.com";
+
 		if (stockData.getClose() != 0) {
 			Properties props = new Properties();
 			Session session = Session.getDefaultInstance(props, null);
@@ -126,23 +128,24 @@ public class PredictionCronServlet extends HttpServlet {
 							.getTime());
 			String msgBody = "";
 			if (buy) {
-				msgBody = "C'est le moment de faire le plein. \n Il y a 5 jours le cours était à "
+				msgBody = "C'est le moment de faire le plein. \n Il y a 5 jours le cours etait a "
 						+ stockData.getClose()
-						+ "$ et il atteint après "
+						+ "€ et il atteint apres "
 						+ max
-						+ "$";
+						+ "€";
 			} else {
-				msgBody = "IL FAUT SURTOUT PAS FAIRE LE PLEIN. \n Il y a 5 jours le cours était à "
+				msgBody = "IL FAUT SURTOUT PAS FAIRE LE PLEIN. \n Il y a 5 jours le cours etait a "
 						+ stockData.getClose()
-						+ "$ et il atteint après "
+						+ "€ et il atteint apres "
 						+ max
-						+ "$";
+						+ "€";
 			}
 
 			try {
+				_logger.info("Envoi d'un message" + msgBody);
 				Message msg = new MimeMessage(session);
 
-				msg.setFrom(new InternetAddress(emailAdd));
+				msg.setFrom(new InternetAddress(emailFrom));
 
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
 						emailAdd, "Mr. Developer"));
